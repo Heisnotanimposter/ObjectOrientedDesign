@@ -1,0 +1,39 @@
+@startuml
+actor 학생
+participant UI
+participant 수강신청시스템
+participant 강좌
+participant 수강신청
+
+학생 -> UI: 수강 신청 페이지 접속
+activate UI
+
+UI -> 수강신청시스템: 수강 가능 강좌 목록 요청
+activate 수강신청시스템
+
+수강신청시스템 -> 강좌: 수강 가능 강좌 목록 조회
+activate 강좌
+
+강좌 -> 수강신청시스템: 수강 가능 강좌 목록 반환
+deactivate 강좌
+
+수강신청시스템 -> UI: 수강 가능 강좌 목록 표시
+deactivate 수강신청시스템
+
+학생 -> UI: 수강 신청 강좌 선택
+activate UI
+
+UI -> 수강신청시스템: 수강 신청 요청 (학생, 강좌)
+activate 수강신청시스템
+
+수강신청시스템 -> 수강신청: 수강 신청 생성 (학생, 강좌)
+activate 수강신청
+
+수강신청 -> 수강신청시스템: 수강 신청 완료
+deactivate 수강신청
+
+수강신청시스템 -> UI: 수강 신청 완료 메시지 표시
+deactivate 수강신청시스템
+
+deactivate UI
+@enduml
